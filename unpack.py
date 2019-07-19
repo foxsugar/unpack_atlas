@@ -67,8 +67,16 @@ def gen_new_img(item_list, img_file, out_dir):
 
         result_image.paste(rect_on_big)
         print(item)
+        
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
+        
+        array = name.split('/')
+        if len(array) > 1:
+            subdir = out_dir + name.replace(array[-1], '')
+            if not os.path.exists(subdir):
+                os.makedirs(subdir)
+        
         outfile = (out_dir + name + '.png')
         result_image.save(outfile)
 
@@ -112,6 +120,4 @@ if __name__ == '__main__':
     dir2 = os.path.join(os.getcwd(),'img')
     if os.path.exists(dir2):
         unpack(dir2)
-
-
 
